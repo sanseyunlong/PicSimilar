@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.container{
+    width: 300px;
+    height: 42px;
+    margin: 100px  auto 0px;
+}
+.container .citySelect{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #00d7c6;
+    position: relative;
+}
+.container .citySelect p{
+    width: 80px;
+    height: 42px;
+    font-size: 13px;
+    line-height: 42px;
+    margin-left: 18px;
+    color: #61687c;
+    cursor: pointer;
+}
+.container .citySelect i{
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: url(./img/downArrow.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 90px;
+    top: 20px;
+    cursor: pointer;
+}
+/* 下半部分 */
+.container .dragArea{
+    width: 100%;
+    height: 300px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: #f6f6f8;
+    display: none;
+}
+.container .dragArea ul:nth-child(1){
+    width: 149px;
+    height: 300px;
+    float: left;
+    overflow: scroll;
+}
+.container .dragArea ul:nth-child(2){
+    width: 149px;
+    height: 300px;
+    float: right;
+    overflow: scroll;
+}
+.container .dragArea ul li{
+    background-color: #fff;
+    width: 129px;
+    height: 50px;
+    padding-left: 20px;
+    line-height: 50px;
+    font-size: 13px;
+    color: #9fa3b0;
+    cursor: pointer;
+}
+/* #active{
+    background: rgb(241, 243, 246);
+} */
+.container .dragArea ul:nth-child(2) li:hover{
+    background: rgb(241, 243, 246);
+}
+.container .dragArea ul::-webkit-scrollbar{
+    width: 4px;
+    height: 0px;
+}
+.container .dragArea ul::-webkit-scrollbar-thumb{
+    background-color: #d1d4d6;
+    border-radius: 4px;
+}

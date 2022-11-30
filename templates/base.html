@@ -1,0 +1,64 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}604 DSNBB{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category in ["success","danger"] %}
+    <div class="alert alert-{{ category }}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="input-group input-group-lg">
+      <span class="input-group-addon" id="sizing-addon1">图片上传或URL：</span>
+      <input type="text" class="form-control" placeholder="请输入查询图片URl" aria-describedby="sizing-addon1" name="ans">
+    </div>
+        <input id="lefile" type="file" style="display:none" name="selectfile">
+        <div class="input-append form-inline">
+            <input id="photoCover" class="form-control" type="text"
+                   style="height:34px;width:92vw;border:2px #337ab7 solid"
+                   placeholder="请选择图片">
+           <div style="display:flex;justify-content: center; align-items:center; text-align:center">
+            <a class="btn btn-primary" onclick="$('input[id=lefile]').click();">浏览</a>&nbsp;
+               <input type="submit" class="btn btn-primary" name="submit" value="上传"/>&nbsp;
+               <input type="submit" class="btn btn-primary" name="submit" value="重置"/>
+        </div></div>
+    </form>
+    <span class="input-group-addon" id="sizing-addon2">识别图片主体：{{ans}}</span>
+    {% if imagename %}
+    <div align="center">
+    <img src="{{ url_for('static',filename='uploads/'+imagename) }}"  style="text-align: center" width="200px" height="200px"/>
+    </div>
+    {% endif %}
+    <span class="input-group-addon" id="sizing-addon3">检索到最相似的6张：</span>
+
+    <div style="align-items: center">
+        {% for i in result2 %}
+
+        <ul class="list">
+            <li>
+                <img src="{{ url_for('static',filename='downloads/'+ i +'.jpg') }}"  width="200px" height="200px"/>
+                <a >相似度：{{ result2[i] }}%</a>
+                 </li>
+             </ul>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+    $('input[id=lefile]').change(function () {
+        $('#photoCover').val($(this).val());
+    });
+    $("#photoCover").attr('autocomplete', 'off')
+</script>
+{% endblock %}
